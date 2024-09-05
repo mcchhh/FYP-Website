@@ -1,0 +1,473 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  display: flex; 
+  /* box-sizing: border-box; */
+  min-height: 100vh; 
+  flex-direction: column; 
+  background: -webkit-linear-gradient(to right, #cfdfe3, #e0eafc);
+  background: linear-gradient(to right, #fff, #fff);
+}
+
+
+/* About us section */
+.about-section {
+  height: auto;
+  background:rgba(255, 255, 255, 0.7);
+  /* background: url('/images/about-background.jpg') center no-repeat; */
+  background-size: 55%;
+  overflow: hidden;
+  padding: 100px 0;
+  margin:0; 
+  padding:0; 
+  box-sizing: border-box;
+  min-height: 100vh;
+  display: flex; 
+  align-items: center;
+  justify-content: center;  /*right*/ 
+  flex: 1;
+  display: flex; 
+  height: 100vh; 
+  position: relative;
+  z-index: 2;
+}
+.about-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('/images/about-background.jpg') center center no-repeat;
+  background-size: cover; /* Ensure the image covers the section */
+  margin-right: 500px;
+  /* background-position: left center; */
+  opacity: 0.25; /* Adjust opacity here */
+  z-index: -1; /* Ensure the background image is behind the content */
+}
+
+.upload-container {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 1000px; 
+  height: 700px;
+  width:100%;
+  padding: 30px; 
+  background: #e3d6c3;
+  border-radius: 20px; 
+  box-shadow: rgba(149,157,165,0.2) 0px 12px 36px;
+  text-align: center; 
+  /* margin-top: -320px; */
+  margin-bottom: 250px;
+  margin-left: 0px; /*510*/
+  position: absolute;
+  z-index: 25;
+  opacity: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.upload-container button {
+  margin-top: 20px;
+}
+
+.upload-container h3 {
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.drag-area {
+  height: 500px; 
+  border: 3px dashed #e0eafc; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  flex-direction: column; 
+  margin: 20px auto;
+  padding: 20px;
+  width: 100%;
+}
+
+.drag-area .active {
+  border: 2px solid #1683ff;
+}
+
+.drag-area img {
+  width: 100%; 
+  height: 100%; 
+  object-fit: cover;
+}
+
+.drag-area .icon {
+  font-size: 50px; 
+  color: #1683ff;
+  margin-bottom: 10px;
+}
+
+.drag-area .header {
+  font-size: 20px; 
+  font-weight: 500; 
+  color: #34495e;
+  margin: 5px 0;
+}
+
+.drag-area .support {
+  font-size: 12px;
+  color: gray; 
+  margin: 10px 0 15px 0;
+}
+
+.drag-area .button {
+  font-size: 20px;
+  color: #007bff;
+  cursor: pointer; 
+  text-decoration: underline;
+}
+
+
+
+
+
+.background {
+  /* position: relative;  */
+  width: 100%; 
+  height: 90vh; 
+  background: url('/images/background.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;  /* Adjust image to cover the whole section */
+  background-position: center;
+  z-index: 0;
+  /* position: absolute; */
+  /* display: flex;  */
+  /* justify-content: center;  before: center  */
+  /* align-items: center; */
+  /* z-index: 1; */
+}
+
+/* .background:before {
+  content: '';
+  position: absolute;
+  bottom:0; 
+  left: 0;
+  width: 100%; 
+  height:200px;
+  background: #fff;
+  clip-path: polygon(100% 0, 0 100%, 100% 100%);
+  z-index: 0;
+
+} */
+
+.background .content {
+  position: relative; 
+  max-width: 900px;
+  text-align: center; 
+  z-index: 10; /* Ensures text is above the background */
+  margin-top: 220px;
+}
+
+.background .content h2 {
+  margin: 0;
+  margin-left: 1025px;
+  margin-top: -80px;
+  padding: 0; 
+  color: #60835A; 
+  font-size: 130px;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.background .content p {
+  color: #000; 
+  font-size: 28px;
+  margin-top: 20px;
+  position: absolute;
+  right: -575px; 
+  /* top: 80px; */
+
+}
+
+/* header {
+  text-align: center;
+  padding: 20px;
+  position: absolute; */
+  /* Ensure the header content appears on top of the background */
+  /* z-index:10; 
+  margin-top: 300px;
+} */
+
+/* Add this CSS to your existing <style> section */
+header h1 {
+    font-family: 'Montserrat', sans-serif; /* Use the custom font you included */
+    /* You can also specify fallback fonts in case the custom font doesn't load */
+    /* font-family: 'Roboto', Arial, sans-serif; */
+    font-size: 50px; /* Change the font size to your desired value */
+}
+
+nav {
+  background-color: #50473D;
+  color: white;
+  width: 100%;
+}
+
+footer {
+  padding: 20px;
+  background-color: #f8f9fa; /* Optional: Add a light background color to the footer for better readability */
+  position: relative;
+  width: 100%;
+  /* position: absolute; */
+  /* z-index: 10; */
+  /* margin-top: 1000px; */
+}
+
+
+
+.btn .btn-primary {
+  background-color: #87CEFA;
+  width: 150px; 
+  height: 50px; 
+  font: 100px;
+}
+
+/* Select the .nav-link class and apply the styles */
+.nav-link {
+  color: white; /* Set the text color to white */
+  font-size: 18px; /* Increase the font size to your desired value */
+  /* You can also add other styles like text-decoration, if needed */
+}
+
+/* Optionally, you can style the links on hover and when they are active */
+.nav-link:hover {
+  text-decoration: underline; /* Add underline on hover */
+}
+
+.nav-link.active {
+  /* Add styles for the active link (e.g., when on the current page) */
+  font-weight: bold; /* Make it bold, for example */
+}
+
+/* button {
+  margin-top: 80px;
+} */
+.button {
+  padding: 6px 24px; 
+  border: 2px solid #fff;
+  background: transparent;
+  border-radius: 6px;
+  color: white;
+}
+
+.custom-footer-bg {
+  background-color: #50473D;
+  width: 100%;
+  position: relative;
+  padding: 20px; 
+}
+
+        /* Home */
+.home {
+    /* position: relative;  */
+    /* height: 100vh; */
+    width: 100%;
+    /* background-image: url(images/background.jpg); */
+    background-size:cover; 
+    background-position: center;
+}
+
+/* Form */ 
+.form_container {
+    position: absolute; 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1.2);
+    max-width:320px;
+    width:100%;
+    z-index: 101;
+    background:#fff;
+    padding:25px; 
+    border-radius: 12px; 
+    box-shadow: rgba(0,0,0,0.1);
+    opacity:0;
+    pointer-events: none;
+    transition: all 0.4s ease-out;
+}
+
+.home.show .form_container {
+  opacity: 1; 
+  pointer-events: auto;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+
+
+.signup_form {
+    display: none;
+}
+
+.form_container.active .signup_form{
+  display: block;
+}
+.form_container.active .login_form{
+  display: none;
+}
+.form_close {
+    position: absolute;
+    top: 10px; 
+    right:20px; 
+    color: #0b0217;
+    font-size: 22px; 
+    opacity:0.7;
+    cursor: pointer; 
+}
+
+.form_container h2{
+    font-size: 22px; 
+    color: #0b0217; 
+    text-align: center; 
+}
+.input_box {
+    position: relative; 
+    margin-top:30px; 
+    width: 100%; 
+    height: 40px; 
+}
+
+.input_box input {
+    height: 100%; 
+    width: 100%;
+    border: none; 
+    outline: none;
+    padding: 0 30px; 
+    color: #333;
+    transition: all 0.2s ease; 
+    border-bottom: 1.5px solid #aaaaaa;
+}
+.input_box input:focus {
+    border-color: #007bff;
+}
+
+.input_box i{
+    position: absolute; 
+    top:50%; 
+    transform: translateY(-50%);
+    font-size: 20px; 
+    color: #707070;
+}
+
+.input_box i.email,
+.input_box i.password,
+.input_box i.user{
+    left: 0; 
+}
+
+.input_box input:focus ~ i.email,
+.input_box input:focus ~ i.password{
+   color: #007bff;
+}
+
+.input_box i.pw_hide {
+    right:0; 
+    font-size: 18px; 
+    cursor: pointer;
+}
+.option_field {
+    margin-top: 14px;
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+}
+.form_container a{
+    color: #007bff;
+    font-size: 12px;
+}
+.form_container a:hover {
+    text-decoration: underline;
+}
+.checkbox {
+    display: flex; 
+    column-gap: 8px;
+    white-space: nowrap; 
+}
+.checkbox input {
+    accent-color: #007bff;
+}
+.checkbox label {
+    font-size: 12px; 
+    cursor: pointer;
+    user-select: none;
+    color: #0b0217;
+}
+.form_container .button{
+    background: #007bff; 
+    margin-top: 30px; 
+    width: 100%; 
+    padding: 10px 0; 
+    border-radius: 10px; 
+    color: white;
+}
+.login_signup {
+    font-size: 12px; 
+    text-align: center; 
+    margin-top: 15px;
+}
+
+/* Add this CSS to style the popup */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal-content {
+  background-color: #fff;
+  text-align: center;
+  padding: 20px;
+  border-radius: 5px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: #000;
+}
+
+/* Add this CSS to your existing <style> section or external stylesheet */
+
+/* Style the custom button */
+.custom-btn {
+  display: inline-block; /* Display the button as an inline element */
+  padding: 10px 30px; /* Adjust padding for width and height */
+  font-size: 20px; /* Change the font size */
+  font-family: 'Montserrat', sans-serif; /* Change the font family */
+  background-color: #007bff; /* Change the background color */
+  color: #fff; /* Change the text color */
+  border: none; /* Remove the border */
+  border-radius: 5px; /* Add rounded corners */
+  text-decoration: none; /* Remove underlines from links */
+  transition: background-color 0.3s ease; /* Add a smooth transition for background color */
+  margin-top: 180px;
+}
+
+/* Style the button on hover */
+/* .custom-btn:hover { */
+  /* background-color: #0056b3; Change the background color on hover */
+/* } */
+        
