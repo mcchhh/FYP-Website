@@ -252,7 +252,292 @@
 
   </footer>
 
+  
   <script>
+
+        
+    // this is for the upload container 
+    const dragArea = document.querySelector('.drag-area'); 
+    const dragText = document.querySelector('.header');
+  
+    let button = document.querySelector('.button');
+    let input = document.querySelector('input');
+  
+    let file;
+  
+    // button.onclick = () => {
+    //   input.click();
+    // };
+  
+    // When a file is selected through the browse button
+    input.addEventListener('change', function() {
+      file = this.files[0];
+      dragArea.classList.add('active'); // Corrected classlist to classList
+      displayFile();
+    });
+  
+    // When the file is inside the drag area 
+    dragArea.addEventListener('dragover', (event) => {
+      event.preventDefault();
+      dragText.textContent = 'Release to Upload';
+      dragArea.classList.add('active'); // Corrected classlist to classList
+      // console.log('File is inside the drag area');
+    });
+  
+    // When the file leaves the drag area 
+    dragArea.addEventListener('dragleave', (event) => {
+      dragText.textContent = 'Drag & Drop';
+      dragArea.classList.remove('active'); // Corrected classlist to classList
+      // console.log('File left the drag area');
+    });
+  
+    // When the file is dropped in the drag area 
+    dragArea.addEventListener('drop', (event) => {
+      event.preventDefault();
+  
+      file = event.dataTransfer.files[0];
+      displayFile();
+      // console.log(file);
+    });
+  
+    function displayFile() {
+      let filetype = file.type;
+      // console.log('fileType');
+  
+      let validExtensions = ['image/jpeg', 'image/jpg', 'image/png'];
+  
+      if(validExtensions.includes(filetype)) {
+        let fileReader = new FileReader();
+  
+        fileReader.onload = () => { 
+          let fileURL = fileReader.result;
+          // console.log(fileURL);
+          let imgTag = `<img src="${fileURL}" alt="">`;
+          dragArea.innerHTML = imgTag;
+        };
+        fileReader.readAsDataURL(file);
+      } else {
+        alert('This file is not an Image');
+        dragArea.classList.remove('active'); // Corrected classlist to classList
+      }
+      // console.log('The file is dropped in drag area');
+    }
+
+
+    // Below are the codes for the login and sign up 
+    const formOpenBtn = document.querySelector("#form-open"),
+    home = document.querySelector(".home"),
+    formContainer = document.querySelector(".form_container"),
+    formCloseBtn = document.querySelector(".form_close"),
+    signupBtn = document.querySelector("#signup"),
+    signupForm = document.querySelector(".signup_form"),
+    loginBtn = document.querySelector("#login"),
+    loginForm = document.querySelector(".login_form"),
+    pwShowHide = document.querySelectorAll(".pw_hide"),
+    modalContent = document.querySelector(".model-content"),
+    modal = document.getElementById("signupSuccessModal"),
+    closeModalBtn = document.getElementById("closeModal");
+    
+    // Assuming the user has successfully signed up
+    const signupEmailInput = document.getElementById('signupEmail');
+    const signupPasswordInput = document.getElementById('signupPassword');
+    const confirmPasswordInput = document.getElementById('confirmPassword');
+    const passwordMismatchError = document.getElementById("passwordMismatchError");
+
+    // New login-related JavaScript code
+    const loginEmailInput = document.querySelector('.email input[type="email"]');
+    const loginPasswordInput = document.querySelector('.password input[type="password"]');
+  
+    // Find the login button element by its ID
+    const loginButton = document.getElementById('login-button');
+    // below for the remembr me function 
+    const rememberMeCheckbox = document.getElementById('rememberMe');
+
+    // Check if there is stored data in local storage
+    const storedSignupEmail = localStorage.getItem('signupEmail');
+    const storedSignupPassword = localStorage.getItem('signupPassword');
+    const storedConfirmPassword = localStorage.getItem('confirmPassword');
+
+    // for the Remember Me pop up function 
+    // Check if there is stored data in local storage
+    const storedLoginEmail = localStorage.getItem('loginEmail');
+    const storedLoginPassword = localStorage.getItem('loginPassword');
+    const storedRememberMe = localStorage.getItem('rememberMe');
+
+    // below for the Remember Me pop up function 
+    // If stored data exists and rememberMe is checked, pre-fill the login form
+    if (storedLoginEmail && storedLoginPassword && storedRememberMe === 'true') {
+      loginEmailInput.value = storedLoginEmail;
+      loginPasswordInput.value = storedLoginPassword;
+      rememberMeCheckbox.checked = true;
+    }
+    
+
+    // Function for the Remember Me popup to show up 
+    function showRememberMePopup(){
+      if (rememberMeCheckbox.checked){
+        const confirmation = confirm("Do you want your details to be remembered?");
+        if (confirmation){
+          localStorage.setItem('loginEmail', loginEmailInput.value);
+          localStorage.setItem('loginPassword', loginPasswordInput.value);
+          localStorage.setItem('rememberMe', 'true');
+        }else{
+          localStorage.removeItem('loginEmail');
+          localStorage.removeItem('loginPassword');
+          localStorage.setItem('rememberMe', 'false');
+        }
+      }
+
+    }
+
+    // below has not been implemented as of now. 
+    // If stored data exists, pre-fill the login form
+    //****Below nothing is stored as of now yet 
+    // if (storedSignupEmail && storedSignupPassword && storedConfirmPassword) {
+    //   loginEmailInput.value = storedSignupEmail;
+    //   loginPasswordInput.value = storedSignupPassword;
+    // }
+
+
+    formOpenBtn.addEventListener("click", () => home.classList.add("show"));
+    formCloseBtn.addEventListener("click", () => {
+      home.classList.remove("show");
+      modal.style.display = "none"; // Hide the modal when closing the form
+    });
+
+    pwShowHide.forEach(icon => {
+      icon.addEventListener("click", () => {
+        let getPwInput = icon.parentElement.querySelector("input");
+        if(getPwInput.type === "password"){
+          getPwInput.type = "text";
+          icon.classList.replace("uil-eye-slash", "uil-eye")
+        }else{
+          getPwInput.type = "password";
+          icon.classList.replace("uil-eye", "uil-eye-slash")
+        }
+      })
+    })
+
+    
+
+    signupBtn.addEventListener("click", (e) => {
+      formContainer.classList.add("active");
+      // Show the popup when the Signup Now button is clicked 
+      modal.style.display = "none";
+      signupForm.style.display ="block";
+      loginForm.style.display = "none"; // Hide the login form 
+        // Reset the input fields
+      signupEmailInput.value = "";
+      signupPasswordInput.value = "";
+      confirmPasswordInput.value = "";
+    });
+    
+    loginBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      formContainer.classList.remove("active");
+      home.classList.add("show");
+      // Show the login form when the "login" button is clicked 
+      signupForm.style.display = "none"; // Hide the signup form 
+      loginForm.style.display = "block"; 
+      // Reset the input fields
+      signedEmailInput.value = "";
+      signedPasswordInput.value = "";
+    });
+
+    // Add an event listener for the signup form submission
+    signupForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      // Store the email and password in local storage
+      // localStorage.setItem("savedEmail", signupEmailInput);
+      // localStorage.setItem("savedPassword", signupPasswordInput);
+      const signupPasswordInput = document.getElementById("signupPassword").value;
+      if (signupPasswordInput !== confirmPasswordInput.value) {
+        passwordMismatchError.style.display = "block"; // Display the error message
+      } else {
+          // Passwords match, you can proceed with form submission
+          // Reset the error message if previously shown
+          passwordMismatchError.style.display = "none";
+
+          // Perform other form submission actions here
+          // formContainer.classList.add("active");
+        // Show the popup when the Signup Now button is clicked
+          modal.style.display = "block";
+      }
+    });
+
+
+  // Add a click event listener to the login button
+    loginButton.addEventListener('click', () => {
+      // show the 'Remember Me' popup when the login button is clicked 
+      showRememberMePopup();
+      // Redirect the user to the loggedin route
+      window.location.href = '/loggedinhome';
+    });
+
+
+    closeModalBtn.addEventListener("click", function() {
+      home.classList.add("show"); // Hide the form and the modal when clicking 'x' in the modal
+      modal.style.display = "none";
+      formContainer.classList.add("active");
+      // Show the login form when closing the popup with 'x'
+      signupForm.style.display = "none";
+      loginForm.style.display = "block";
+      // home.classList.remove("show");
+    });
+
+    
+    
+    // Close the modal if the user clicks outside of it
+    window.addEventListener("click", function(event) {
+      if (event.target === modal) {
+        home.classList.remove("show"); // Hide the form and the modal when clicking 'x' in the modal
+        modal.style.display = "none";
+        formContainer.classList.remove("active"); // Show the login form
+        // Show the login form when clicking ouside the modal 
+        signupForm.style.display = 'none';
+        loginForm.style.display = "block";
+      }
+    });
+    
+    modalContent.addEventListener("click", () => {
+      home.classList.add("show"); // Hide the form
+      modal.style.display = "none"; // Hide the modal
+      formContainer.classList.add("active"); // Show the login form
+      // Show the login form when clicking ouside the modal 
+      signupForm.style.display = 'none';
+        loginForm.style.display = "block";
+    });
+
+
+    document.querySelector('form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const name = document.getElementById('signupName').value;
+      const email = document.getElementById('signupEmail').value;
+      const password = document.getElementById('signupPassword').value;
+      
+      const response = await fetch('/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name, email, password }),
+      });
+      if (response.ok) {
+      // Account created successfully
+      // You can show a success message or redirect the user
+      // For example, display the success modal:
+      document.getElementById('signupSuccessModal').style.display = 'block';
+    } else {
+      // Handle errors, such as displaying an error message on the page
+      console.error('Error creating an account');
+    }
+  });
+     
+  
+
+  </script>
+
+  <!-- <script>
     const formOpenBtn = document.querySelector("#form-open"),
     home = document.querySelector(".home"),
     formContainer = document.querySelector(".form_container"),
@@ -530,7 +815,7 @@
     // console.log('The file is dropped in drag area');
   }
 
-  </script>
+  </script> -->
 
   
   </body>
