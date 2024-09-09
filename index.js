@@ -28,7 +28,7 @@ app.use(express.static(__dirname + 'script'));
 
 
 app.get('/', (req,res)=>{
-  res.render('newindex.ejs');  // change this once home page changed
+  res.render('index1.ejs');  // change this once home page changed
 }) 
 
 // Define a route to render the loggedin.ejs page
